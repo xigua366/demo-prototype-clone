@@ -148,17 +148,17 @@ public class AbstractObject {
 
 			if (cloneDirection.equals(CloneDirection.FORWARD)) {
 				if (className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 2) + "DTO";
+					cloneTargetClassName = className.substring(0, className.length() - 2).replace(".vo", ".dto") + "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 3);
+					cloneTargetClassName = className.substring(0, className.length() - 3).replace(".dto", ".domain");
 				}
 			}
 
 			if (cloneDirection.equals(CloneDirection.OPPOSITE)) {
 				if (!className.endsWith(DomainType.DTO) && !className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length()) + "DTO";
+					cloneTargetClassName = className.substring(0, className.length()).replace(".domain", ".dto") + "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 3) + "VO";
+					cloneTargetClassName = className.substring(0, className.length() - 3).replace(".dto", ".vo") + "VO";
 				}
 			}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.yx.demo.common.CloneDirection;
 import com.yx.demo.domain.Person;
 import com.yx.demo.dto.PersonDTO;
 import com.yx.demo.vo.HouseVO;
@@ -25,11 +26,11 @@ public class Test01 {
 		System.out.println("原始对象personVO:" + personVO);
 		
 		// PersonVO clone 成 DTO
-		PersonDTO personDTO = personVO.clone(PersonDTO.class);
+		PersonDTO personDTO = personVO.clone(PersonDTO.class, CloneDirection.FORWARD);
 		System.out.println("DTO对象personDTO:" + personDTO);
 		
 		// DTO clone 成 Domain类
-		Person person = personDTO.clone(Person.class);
+		Person person = personDTO.clone(Person.class, CloneDirection.FORWARD);
 		System.out.println("Domain对象person:" + person);
 	}
 	
