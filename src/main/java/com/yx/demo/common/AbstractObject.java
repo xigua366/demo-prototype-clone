@@ -27,7 +27,8 @@ public class AbstractObject {
 		try {
 			T target = clazz.newInstance();
 			BeanCopierUtils.copyProperties(this, target);
-			return target;
+
+			return getTarget(target);
 		} catch (Exception e) {
 			throw new RuntimeException("error", e);
 		}
@@ -42,7 +43,40 @@ public class AbstractObject {
 	 * @throws Exception
 	 */
 	public <T> T clone(T target) {
-		BeanCopierUtils.copyProperties(this, target);
+		try {
+			BeanCopierUtils.copyProperties(this, target);
+			return getTarget(target);
+		} catch (Exception e) {
+			throw new RuntimeException("error", e);
+		}
+	}
+
+	/**
+	 * 
+	 * @param <T>
+	 * @param target
+	 * @return
+	 * @throws Exception
+	 */
+	private <T> T getTarget(T target) throws Exception {
+		Class<?> thisClazz = target.getClass();
+		Field[] fields = thisClazz.getDeclaredFields();
+		for (Field field : fields) {
+			field.setAccessible(true);
+
+			// 如果判断某个字段是List类型的
+			if (field.getType() != List.class) {
+				continue;
+			}
+			List<?> list = (List<?>) field.get(target);
+			if (list == null || list.size() == 0) {
+				continue;
+			}
+
+			Method setFieldMethod = getSetCloneListFieldMethodName(field, target.getClass());
+			setFieldMethod.invoke(target, new ArrayList());
+		}
+
 		return target;
 	}
 
@@ -148,7 +182,8 @@ public class AbstractObject {
 
 			if (cloneDirection.equals(CloneDirection.FORWARD)) {
 				if (className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 2).replace(".vo", ".dto") + "DTO";
+					cloneTargetClassName = className.substring(0, className.length() - 2).replace(".vo", ".dto")
+							+ "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
 					cloneTargetClassName = className.substring(0, className.length() - 3).replace(".dto", ".domain");
 				}
@@ -156,7 +191,8 @@ public class AbstractObject {
 
 			if (cloneDirection.equals(CloneDirection.OPPOSITE)) {
 				if (!className.endsWith(DomainType.DTO) && !className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length()).replace(".domain", ".dto") + "DTO";
+					cloneTargetClassName = className.substring(0, className.length()).replace(".domain", ".dto")
+							+ "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
 					cloneTargetClassName = className.substring(0, className.length() - 3).replace(".dto", ".vo") + "VO";
 				}

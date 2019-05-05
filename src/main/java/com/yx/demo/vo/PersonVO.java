@@ -15,6 +15,8 @@ public class PersonVO extends AbstractObject {
 
 	private Date birthday;
 	
+	private HouseVO house;
+	
 	/**
 	 * 每个人有多套房子
 	 */
@@ -52,6 +54,16 @@ public class PersonVO extends AbstractObject {
 		this.birthday = birthday;
 	}
 
+	
+
+	public HouseVO getHouse() {
+		return house;
+	}
+
+	public void setHouse(HouseVO house) {
+		this.house = house;
+	}
+
 	public List<HouseVO> getHouses() {
 		return houses;
 	}
@@ -62,12 +74,8 @@ public class PersonVO extends AbstractObject {
 
 	@Override
 	public String toString() {
-		return "PersonVO [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", houses="
-				+ houses + "]";
+		return "PersonVO [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", house=" + house
+				+ ", houses=" + houses + "]";
 	}
-
-	
-
-	
 
 }

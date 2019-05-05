@@ -15,6 +15,8 @@ public class Person extends AbstractObject {
 	
 	private Date birthday;
 	
+	private House house;
+	
 	/**
 	 * 每个人有多套房子
 	 */
@@ -60,16 +62,19 @@ public class Person extends AbstractObject {
 		this.houses = houses;
 	}
 
-	@Override
-	public String toString() {
-		return "Person [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", houses=" + houses
-				+ "]";
+	public House getHouse() {
+		return house;
 	}
 
-	
-	
-	
+	public void setHouse(House house) {
+		this.house = house;
+	}
 
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", house=" + house
+				+ ", houses=" + houses + "]";
+	}
 	
 	
 	

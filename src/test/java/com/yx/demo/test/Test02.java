@@ -55,7 +55,7 @@ public class Test02 {
 		houseVO02.setColor("blue");
 		houseVO02.setArea(130);
 		houseList.add(houseVO02);
-		personVO.setHouses(houseList);
+		// personVO.setHouses(houseList);
 		
 		list.add(personVO);
 		
@@ -77,7 +77,7 @@ public class Test02 {
 		houseVO02.setColor("blue");
 		houseVO02.setArea(135);
 		houseList.add(houseVO02);
-		personVO.setHouses(houseList);
+		// personVO.setHouses(houseList);
 		list.add(personVO);
 		
 		return list;

@@ -15,6 +15,8 @@ public class PersonDTO extends AbstractObject {
 
 	private Date birthday;
 	
+	private HouseDTO house;
+	
 	/**
 	 * 每个人有多套房子
 	 */
@@ -52,6 +54,14 @@ public class PersonDTO extends AbstractObject {
 		this.birthday = birthday;
 	}
 
+	public HouseDTO getHouse() {
+		return house;
+	}
+
+	public void setHouse(HouseDTO house) {
+		this.house = house;
+	}
+
 	public List<HouseDTO> getHouses() {
 		return houses;
 	}
@@ -62,12 +72,10 @@ public class PersonDTO extends AbstractObject {
 
 	@Override
 	public String toString() {
-		return "PersonDTO [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", houses="
-				+ houses + "]";
+		return "PersonDTO [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", house=" + house
+				+ ", houses=" + houses + "]";
 	}
 
 	
-
-
 	
 }

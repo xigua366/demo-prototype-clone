@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.yx.demo.common.CloneDirection;
 import com.yx.demo.domain.Person;
+import com.yx.demo.dto.HouseDTO;
 import com.yx.demo.dto.PersonDTO;
 import com.yx.demo.vo.HouseVO;
 import com.yx.demo.vo.PersonVO;
@@ -28,6 +29,10 @@ public class Test01 {
 		// PersonVO clone 成 DTO
 		PersonDTO personDTO = personVO.clone(PersonDTO.class, CloneDirection.FORWARD);
 		System.out.println("DTO对象personDTO:" + personDTO);
+		
+		for(HouseDTO orderItem : personDTO.getHouses()) {
+			System.out.println(orderItem.getClass());
+		}
 		
 		// DTO clone 成 Domain类
 		Person person = personDTO.clone(Person.class, CloneDirection.FORWARD);
@@ -55,6 +60,8 @@ public class Test01 {
 		houseVO02.setArea(130);
 		houseList.add(houseVO02);
 		personVO.setHouses(houseList);
+		
+		personVO.setHouse(houseVO02);
 		
 		return personVO;
 	}
