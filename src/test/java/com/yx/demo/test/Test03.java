@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.yx.demo.common.CloneDirection;
 import com.yx.demo.domain.Person;
 import com.yx.demo.dto.PersonDTO;
 import com.yx.demo.vo.HouseVO;
 import com.yx.demo.vo.PersonVO;
 
 /**
- * 单个对象克隆（浅度克隆）测试，直接调用对象的clone()方法
+ * 单个对象克隆（深度克隆）测试，直接调用对象的clone()方法
  * @author yangxi
  *
  */
-public class Test01 {
+public class Test03 {
 	
 	
 	public static void main(String[] args) {
@@ -25,11 +26,11 @@ public class Test01 {
 		System.out.println("原始对象personVO:" + personVO);
 		
 		// PersonVO clone 成 DTO
-		PersonDTO personDTO = personVO.clone(PersonDTO.class);
+		PersonDTO personDTO = personVO.clone(PersonDTO.class, CloneDirection.FORWARD);
 		System.out.println("DTO对象personDTO:" + personDTO);
 		
 		// DTO clone 成 Domain类
-		Person person = personDTO.clone(Person.class);
+		Person person = personDTO.clone(Person.class, CloneDirection.FORWARD);
 		System.out.println("Domain对象person:" + person);
 	}
 	

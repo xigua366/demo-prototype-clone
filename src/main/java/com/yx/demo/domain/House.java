@@ -2,11 +2,16 @@ package com.yx.demo.domain;
 
 import com.yx.demo.common.AbstractObject;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 /**
  * 房子
  * @author yangxi
  *
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class House extends AbstractObject {
 	
 	private Long id;
@@ -14,35 +19,6 @@ public class House extends AbstractObject {
 	private Integer area;
 	
 	private String color;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Integer getArea() {
-		return area;
-	}
-
-	public void setArea(Integer area) {
-		this.area = area;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	@Override
-	public String toString() {
-		return "House [id=" + id + ", area=" + area + ", color=" + color + "]";
-	}
 	
 	
 

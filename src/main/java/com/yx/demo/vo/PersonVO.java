@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.yx.demo.common.AbstractObject;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class PersonVO extends AbstractObject {
 
 	private Long id;
@@ -22,60 +27,6 @@ public class PersonVO extends AbstractObject {
 	 */
 	private List<HouseVO> houses;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
 	
-
-	public HouseVO getHouse() {
-		return house;
-	}
-
-	public void setHouse(HouseVO house) {
-		this.house = house;
-	}
-
-	public List<HouseVO> getHouses() {
-		return houses;
-	}
-
-	public void setHouses(List<HouseVO> houses) {
-		this.houses = houses;
-	}
-
-	@Override
-	public String toString() {
-		return "PersonVO [id=" + id + ", name=" + name + ", age=" + age + ", birthday=" + birthday + ", house=" + house
-				+ ", houses=" + houses + "]";
-	}
 
 }
