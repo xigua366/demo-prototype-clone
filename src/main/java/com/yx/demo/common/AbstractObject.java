@@ -79,12 +79,16 @@ public class AbstractObject {
 				// 如果判断某个字段是List类型的
 				if (field.getType() != List.class) {
 					Class<?> sourceFeildClazz = field.getType();
-					if (sourceFeildClazz == String.class || sourceFeildClazz == Long.class || sourceFeildClazz.toString().equals("long")
-							|| field.getType() == Integer.class || sourceFeildClazz.toString().equals("int") || sourceFeildClazz == Short.class || sourceFeildClazz.toString().equals("short")
-							|| sourceFeildClazz == Double.class || sourceFeildClazz.toString().equals("double") || sourceFeildClazz == Float.class || sourceFeildClazz.toString().equals("float")
-							|| sourceFeildClazz == BigDecimal.class || sourceFeildClazz == Boolean.class || sourceFeildClazz.toString().equals("boolean")
-							|| sourceFeildClazz == Date.class || sourceFeildClazz == Character.class || sourceFeildClazz.toString().equals("char")
-							|| sourceFeildClazz == Byte.class || sourceFeildClazz.toString().equals("byte") || sourceFeildClazz == java.sql.Date.class) {
+					if (sourceFeildClazz == String.class || sourceFeildClazz == Long.class
+							|| sourceFeildClazz.toString().equals("long") || field.getType() == Integer.class
+							|| sourceFeildClazz.toString().equals("int") || sourceFeildClazz == Short.class
+							|| sourceFeildClazz.toString().equals("short") || sourceFeildClazz == Double.class
+							|| sourceFeildClazz.toString().equals("double") || sourceFeildClazz == Float.class
+							|| sourceFeildClazz.toString().equals("float") || sourceFeildClazz == BigDecimal.class
+							|| sourceFeildClazz == Boolean.class || sourceFeildClazz.toString().equals("boolean")
+							|| sourceFeildClazz == Date.class || sourceFeildClazz == Character.class
+							|| sourceFeildClazz.toString().equals("char") || sourceFeildClazz == Byte.class
+							|| sourceFeildClazz.toString().equals("byte") || sourceFeildClazz == java.sql.Date.class) {
 						continue;
 					}
 					// 判断某个字段是否AbstractObject类型的
