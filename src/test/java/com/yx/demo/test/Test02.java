@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.yx.demo.domain.Person;
 import com.yx.demo.dto.PersonDTO;
-import com.yx.demo.util.ObjectUtils;
+import com.yx.demo.util.ObjectCloneUtils;
 import com.yx.demo.vo.CarVO;
 import com.yx.demo.vo.HouseVO;
 import com.yx.demo.vo.PersonVO;
@@ -28,11 +28,11 @@ public class Test02 {
 		System.out.println("原始对象personVOs:" + personVOs);
 		
 		// PersonVO clone 成 DTO
-		List<PersonDTO> personDTOs = ObjectUtils.convertList(personVOs, PersonDTO.class);
+		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(personVOs, PersonDTO.class);
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 		
 		// DTO clone 成 Domain类
-		List<Person> persons = ObjectUtils.convertList(personDTOs, Person.class);
+		List<Person> persons = ObjectCloneUtils.convertList(personDTOs, Person.class);
 		System.out.println("Domain对象person:" + persons);
 	}
 	

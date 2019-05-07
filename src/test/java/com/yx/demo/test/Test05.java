@@ -10,7 +10,7 @@ import com.yx.demo.domain.Car;
 import com.yx.demo.domain.House;
 import com.yx.demo.domain.Person;
 import com.yx.demo.dto.PersonDTO;
-import com.yx.demo.util.ObjectUtils;
+import com.yx.demo.util.ObjectCloneUtils;
 import com.yx.demo.vo.PersonVO;
 
 /**
@@ -29,11 +29,11 @@ public class Test05 {
 		System.out.println("原始对象persons:" + persons);
 		
 		// Person clone 成 DTO
-		List<PersonDTO> personDTOs = ObjectUtils.convertList(persons, PersonDTO.class, CloneDirection.OPPOSITE);
+		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(persons, PersonDTO.class, CloneDirection.OPPOSITE);
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 		
 		// DTO clone 成 VO类
-		List<PersonVO> personVOs = ObjectUtils.convertList(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
+		List<PersonVO> personVOs = ObjectCloneUtils.convertList(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
 		System.out.println("VO对象personVO:" + personVOs);
 	}
 	

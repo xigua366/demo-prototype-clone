@@ -6,11 +6,11 @@ import java.util.List;
 import com.yx.demo.common.AbstractObject;
 
 /**
- * 对象工具类
+ * 对象Clone工具类
  * @author yangxi
  *
  */
-public class ObjectUtils {
+public class ObjectCloneUtils {
 
 	/**
 	 * 转换集合
