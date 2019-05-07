@@ -11,7 +11,7 @@ import com.yx.demo.vo.HouseVO;
 import com.yx.demo.vo.PersonVO;
 
 /**
- * 集合对象克隆（浅度）测试，使用ObjectUtils.convertList() 工具类方法
+ * 集合对象克隆（浅度克隆）测试，使用ObjectUtils.convertList() 工具类方法
  * @author yangxi
  *
  */

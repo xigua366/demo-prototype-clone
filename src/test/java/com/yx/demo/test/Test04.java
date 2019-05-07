@@ -12,7 +12,7 @@ import com.yx.demo.vo.HouseVO;
 import com.yx.demo.vo.PersonVO;
 
 /**
- * 集合对象克隆（浅度）测试，使用ObjectUtils.convertList() 工具类方法
+ * 集合对象克隆（深度克隆，正向）测试，使用ObjectUtils.convertList() 工具类方法
  * @author yangxi
  *
  */
@@ -58,6 +58,8 @@ public class Test04 {
 		houseList.add(houseVO02);
 		personVO.setHouses(houseList);
 		
+		personVO.setHouse(houseVO02);
+		
 		list.add(personVO);
 		
 		personVO = new PersonVO();
@@ -78,7 +80,9 @@ public class Test04 {
 		houseVO02.setColor("blue");
 		houseVO02.setArea(135);
 		houseList.add(houseVO02);
-		// personVO.setHouses(houseList);
+		personVO.setHouses(houseList);
+		personVO.setHouse(houseVO02);
+		
 		list.add(personVO);
 		
 		return list;

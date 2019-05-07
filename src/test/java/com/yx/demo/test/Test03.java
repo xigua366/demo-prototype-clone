@@ -11,7 +11,7 @@ import com.yx.demo.vo.HouseVO;
 import com.yx.demo.vo.PersonVO;
 
 /**
- * 单个对象克隆（深度克隆）测试，直接调用对象的clone()方法
+ * 单个对象克隆（深度克隆，正向）测试，直接调用对象的clone()方法
  * @author yangxi
  *
  */
