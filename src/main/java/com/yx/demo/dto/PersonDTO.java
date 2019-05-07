@@ -20,12 +20,15 @@ public class PersonDTO extends AbstractObject {
 
 	private Date birthday;
 	
+	/**
+	 * 每个人只有一套房子
+	 */
 	private HouseDTO house;
 	
 	/**
-	 * 每个人有多套房子
+	 * 每个人有多辆车
 	 */
-	private List<HouseDTO> houses;
+	private List<CarDTO> cars;
 
 	
 	

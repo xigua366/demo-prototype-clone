@@ -20,12 +20,17 @@ public class PersonVO extends AbstractObject {
 
 	private Date birthday;
 	
+	/**
+	 * 每个人有一套房子
+	 */
 	private HouseVO house;
 	
 	/**
-	 * 每个人有多套房子
+	 * 每个人有多辆车
 	 */
-	private List<HouseVO> houses;
+	private List<CarVO> cars;
+	
+	
 
 	
 

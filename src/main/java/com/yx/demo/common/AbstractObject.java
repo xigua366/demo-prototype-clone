@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -81,9 +82,9 @@ public class AbstractObject {
 					if (sourceFeildClazz == String.class || sourceFeildClazz == Long.class
 							|| field.getType() == Integer.class || sourceFeildClazz == Short.class
 							|| sourceFeildClazz == Double.class || sourceFeildClazz == Float.class
-							|| sourceFeildClazz == Boolean.class || sourceFeildClazz == Date.class
-							|| sourceFeildClazz == Character.class || sourceFeildClazz == Byte.class
-							|| sourceFeildClazz == java.sql.Date.class) {
+							|| sourceFeildClazz == BigDecimal.class || sourceFeildClazz == Boolean.class
+							|| sourceFeildClazz == Date.class || sourceFeildClazz == Character.class
+							|| sourceFeildClazz == Byte.class || sourceFeildClazz == java.sql.Date.class) {
 						continue;
 					}
 					// 判断某个字段是否AbstractObject类型的
@@ -98,10 +99,10 @@ public class AbstractObject {
 						throw new RuntimeException("error", e);
 					}
 					AbstractObject sourceObj = (AbstractObject) (field.get(this));
-					if(sourceObj == null) {
+					if (sourceObj == null) {
 						continue;
 					}
-					
+
 					// 获取要克隆的目标类型
 					Class<?> cloneTargetClazz = getCloneTargetClazz(field.getType(), cloneDirection);
 					AbstractObject clonedObj = (AbstractObject) sourceObj.clone(cloneTargetClazz, cloneDirection);
