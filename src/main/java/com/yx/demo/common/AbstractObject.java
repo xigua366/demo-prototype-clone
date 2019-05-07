@@ -97,7 +97,7 @@ public class AbstractObject {
 							continue;
 						}
 					} catch (Exception e) {
-						if (e instanceof NoSuchMethodException) {
+						if (e instanceof InstantiationException) {
 							continue;
 						}
 						throw new RuntimeException("error", e);
