@@ -15,6 +15,6 @@ public class TestObjDTO extends AbstractObject {
 	
 	private StudentDTO student;
 	
-	private List<StudentDTO> students;
+	// private List<StudentDTO> students;
 
 }

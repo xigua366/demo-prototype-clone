@@ -61,13 +61,19 @@ public class Test07 {
 //		private boolean bool;
 		student.setBool(false);
 		
+		Student subStudent = new Student();
+		subStudent.setId(2);
+		subStudent.setAge(20);
+		
+		student.setSubStudent(subStudent);
+		
 		testObj.setStudent(student);
 		
 		List<Student> students = new ArrayList<>();
 		students.add(student);
 		students.add(student);
 		
-		testObj.setStudents(students);
+		// testObj.setStudents(students);
 		return testObj;
 	}
 

@@ -1,6 +1,7 @@
 package com.yx.demo.dto;
 
 import com.yx.demo.common.AbstractObject;
+import com.yx.demo.domain.Student;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,7 +27,7 @@ public class StudentDTO extends AbstractObject {
 	private boolean bool;
 	
 	
-	
+	private StudentDTO subStudent;
 	
 
 }

@@ -26,6 +26,7 @@ public class Student extends AbstractObject {
 	private boolean bool;
 	
 	
+	private Student subStudent; 
 	
 	
 

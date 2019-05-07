@@ -15,7 +15,7 @@ public class TestObjVO extends AbstractObject {
 	
 	private StudentVO student;
 	
-	private List<StudentVO> students;
+	// private List<StudentVO> students;
 	
 	
 

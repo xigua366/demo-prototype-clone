@@ -15,6 +15,6 @@ public class TestObj extends AbstractObject {
 	
 	private Student student;
 	
-	private List<Student> students;
+	// private List<Student> students;
 
 }

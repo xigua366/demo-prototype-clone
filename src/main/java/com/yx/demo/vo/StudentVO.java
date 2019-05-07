@@ -1,6 +1,7 @@
 package com.yx.demo.vo;
 
 import com.yx.demo.common.AbstractObject;
+import com.yx.demo.domain.Student;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +28,6 @@ public class StudentVO extends AbstractObject {
 	
 	
 	
-	
+	private StudentVO subStudent;
 
 }
