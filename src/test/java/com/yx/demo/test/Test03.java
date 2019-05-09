@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.yx.demo.common.CloneDirection;
-import com.yx.demo.domain.Person;
-import com.yx.demo.dto.PersonDTO;
-import com.yx.demo.vo.CarVO;
-import com.yx.demo.vo.HouseVO;
-import com.yx.demo.vo.PersonVO;
+import com.yx.demo.domain.CarVO;
+import com.yx.demo.domain.HouseVO;
+import com.yx.demo.domain.PersonDO;
+import com.yx.demo.domain.PersonDTO;
+import com.yx.demo.domain.PersonVO;
 
 /**
  * 单个对象克隆（深度克隆，正向）测试，直接调用对象的clone()方法
@@ -32,7 +32,7 @@ public class Test03 {
 		System.out.println("DTO对象personDTO:" + personDTO);
 		
 		// DTO clone 成 Domain类
-		Person person = personDTO.clone(Person.class, CloneDirection.FORWARD);
+		PersonDO person = personDTO.clone(PersonDO.class, CloneDirection.FORWARD);
 		System.out.println("Domain对象person:" + person);
 	}
 	

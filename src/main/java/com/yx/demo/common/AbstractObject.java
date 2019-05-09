@@ -189,21 +189,23 @@ public class AbstractObject {
 			// ReflectionDTO
 			String className = clazz.getName();
 
+			// 正向克隆
 			if (cloneDirection.equals(CloneDirection.FORWARD)) {
 				if (className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 2).replace(".vo", ".dto")
+					cloneTargetClassName = className.substring(0, className.length() - 2)
 							+ "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 3).replace(".dto", ".domain");
+					cloneTargetClassName = className.substring(0, className.length() - 3) + "DO";
 				}
 			}
 
+			// 反向克隆
 			if (cloneDirection.equals(CloneDirection.OPPOSITE)) {
-				if (!className.endsWith(DomainType.DTO) && !className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length()).replace(".domain", ".dto")
+				if (className.endsWith(DomainType.DO)) {
+					cloneTargetClassName = className.substring(0, className.length() - 2)
 							+ "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 3).replace(".dto", ".vo") + "VO";
+					cloneTargetClassName = className.substring(0, className.length() - 3) + "VO";
 				}
 			}
 

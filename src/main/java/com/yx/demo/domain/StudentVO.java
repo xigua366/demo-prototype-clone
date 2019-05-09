@@ -1,7 +1,6 @@
-package com.yx.demo.vo;
+package com.yx.demo.domain;
 
 import com.yx.demo.common.AbstractObject;
-import com.yx.demo.domain.Student;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Car extends AbstractObject {
+public class CarDTO extends AbstractObject {
 	
 	private Long id;
 	

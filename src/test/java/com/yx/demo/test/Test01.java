@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.domain.Person;
-import com.yx.demo.dto.PersonDTO;
-import com.yx.demo.vo.CarVO;
-import com.yx.demo.vo.HouseVO;
-import com.yx.demo.vo.PersonVO;
+import com.yx.demo.domain.CarVO;
+import com.yx.demo.domain.HouseVO;
+import com.yx.demo.domain.PersonDO;
+import com.yx.demo.domain.PersonDTO;
+import com.yx.demo.domain.PersonVO;
 
 /**
  * 单个对象克隆（浅度克隆）测试，直接调用对象的clone()方法
@@ -31,7 +31,7 @@ public class Test01 {
 		System.out.println("DTO对象personDTO:" + personDTO);
 		
 		// DTO clone 成 Domain类
-		Person person = personDTO.clone(Person.class);
+		PersonDO person = personDTO.clone(PersonDO.class);
 		System.out.println("Domain对象person:" + person);
 	}
 	

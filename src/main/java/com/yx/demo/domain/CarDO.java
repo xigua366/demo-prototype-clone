@@ -1,27 +1,20 @@
-package com.yx.demo.vo;
+package com.yx.demo.domain;
+
+import java.math.BigDecimal;
 
 import com.yx.demo.common.AbstractObject;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- * 房子
- * @author yangxi
- *
- */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class HouseVO extends AbstractObject {
+public class CarDO extends AbstractObject {
 	
 	private Long id;
 	
-	private Integer area;
+	private String brand;
 	
-	private String color;
-
-	
-	
-	
+	private BigDecimal price;
 
 }

@@ -1,4 +1,4 @@
-package com.yx.demo.vo;
+package com.yx.demo.domain;
 
 import java.util.Date;
 import java.util.List;
@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class PersonVO extends AbstractObject {
+public class PersonDTO extends AbstractObject {
 
 	private Long id;
 
@@ -21,17 +21,15 @@ public class PersonVO extends AbstractObject {
 	private Date birthday;
 	
 	/**
-	 * 每个人有一套房子
+	 * 每个人只有一套房子
 	 */
-	private HouseVO house;
+	private HouseDTO house;
 	
 	/**
 	 * 每个人有多辆车
 	 */
-	private List<CarVO> cars;
-	
-	
+	private List<CarDTO> cars;
 
 	
-
+	
 }

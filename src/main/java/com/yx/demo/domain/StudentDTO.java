@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Student extends AbstractObject {
+public class StudentDTO extends AbstractObject {
 	
 	private byte bb;
 	
@@ -26,8 +26,7 @@ public class Student extends AbstractObject {
 	private boolean bool;
 	
 	
-	private Student subStudent; 
-	
+	private StudentDTO subStudent;
 	
 
 }

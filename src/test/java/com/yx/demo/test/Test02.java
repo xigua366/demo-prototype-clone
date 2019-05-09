@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.domain.Person;
-import com.yx.demo.dto.PersonDTO;
+import com.yx.demo.domain.CarVO;
+import com.yx.demo.domain.HouseVO;
+import com.yx.demo.domain.PersonDO;
+import com.yx.demo.domain.PersonDTO;
+import com.yx.demo.domain.PersonVO;
 import com.yx.demo.util.ObjectCloneUtils;
-import com.yx.demo.vo.CarVO;
-import com.yx.demo.vo.HouseVO;
-import com.yx.demo.vo.PersonVO;
 
 /**
  * 集合对象克隆（浅度克隆）测试，使用ObjectUtils.convertList() 工具类方法
@@ -32,7 +32,7 @@ public class Test02 {
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 		
 		// DTO clone 成 Domain类
-		List<Person> persons = ObjectCloneUtils.convertList(personDTOs, Person.class);
+		List<PersonDO> persons = ObjectCloneUtils.convertList(personDTOs, PersonDO.class);
 		System.out.println("Domain对象person:" + persons);
 	}
 	

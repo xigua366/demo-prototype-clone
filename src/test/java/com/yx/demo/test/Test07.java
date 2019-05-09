@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yx.demo.common.CloneDirection;
-import com.yx.demo.domain.Student;
-import com.yx.demo.domain.TestObj;
-import com.yx.demo.dto.TestObjDTO;
+import com.yx.demo.domain.StudentDO;
+import com.yx.demo.domain.TestObjDO;
+import com.yx.demo.domain.TestObjDTO;
 
 /**
- * 基本数据类型的深度拷贝
+ * 基本数据类型的深度拷贝测试
  * @author yangxi
  *
  */
 public class Test07 {
 	
 	public static void main(String[] args) {
-		TestObj testObj = getTestObj();
+		TestObjDO testObj = getTestObj();
 		System.out.println(testObj);
 		
 		TestObjDTO testObjDTO = testObj.clone(TestObjDTO.class, CloneDirection.OPPOSITE);
@@ -24,11 +24,11 @@ public class Test07 {
 		System.out.println(testObjDTO);
 	}
 	
-	public static TestObj getTestObj() {
-		TestObj testObj = new TestObj();
+	public static TestObjDO getTestObj() {
+		TestObjDO testObj = new TestObjDO();
 		
 		
-		Student student = new Student();
+		StudentDO student = new StudentDO();
 		
 		
 //		private byte bb;
@@ -61,7 +61,7 @@ public class Test07 {
 //		private boolean bool;
 		student.setBool(false);
 		
-		Student subStudent = new Student();
+		StudentDO subStudent = new StudentDO();
 		subStudent.setId(2);
 		subStudent.setAge(20);
 		
@@ -69,7 +69,7 @@ public class Test07 {
 		
 		testObj.setStudent(student);
 		
-		List<Student> students = new ArrayList<>();
+		List<StudentDO> students = new ArrayList<>();
 		students.add(student);
 		students.add(student);
 		

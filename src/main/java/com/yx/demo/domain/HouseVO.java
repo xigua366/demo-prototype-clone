@@ -12,13 +12,15 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class House extends AbstractObject {
+public class HouseVO extends AbstractObject {
 	
 	private Long id;
 	
 	private Integer area;
 	
 	private String color;
+
+	
 	
 	
 

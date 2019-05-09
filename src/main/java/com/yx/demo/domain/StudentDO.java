@@ -1,14 +1,13 @@
-package com.yx.demo.dto;
+package com.yx.demo.domain;
 
 import com.yx.demo.common.AbstractObject;
-import com.yx.demo.domain.Student;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class StudentDTO extends AbstractObject {
+public class StudentDO extends AbstractObject {
 	
 	private byte bb;
 	
@@ -27,7 +26,8 @@ public class StudentDTO extends AbstractObject {
 	private boolean bool;
 	
 	
-	private StudentDTO subStudent;
+	private StudentDO subStudent; 
+	
 	
 
 }

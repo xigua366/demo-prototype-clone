@@ -10,26 +10,28 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class Person extends AbstractObject {
-	
+public class PersonVO extends AbstractObject {
+
 	private Long id;
-	
+
 	private String name;
-	
+
 	private Integer age;
-	
+
 	private Date birthday;
 	
 	/**
-	 * 每个人只有一套房子
+	 * 每个人有一套房子
 	 */
-	private House house;
+	private HouseVO house;
 	
 	/**
-	 * 每个人有多辆车子
+	 * 每个人有多辆车
 	 */
-	private List<Car> cars;
+	private List<CarVO> cars;
 	
+	
+
 	
 
 }
