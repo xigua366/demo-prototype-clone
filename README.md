@@ -9,7 +9,7 @@
 浅度克隆是指只克隆一个领域对象中的自己本身的字段，比如有一个对应的订单对象OrderDTO，然后有Long id, String orderNo这两个自己本身的对象，但由于订单与订单详情一对一的关系，在OrderDTO类里面也定义了一个OrderDetailDTO orderDetail订单详情字段（OrderDetailDTO对象也是一个领域对象，不是订单对象OrderDTO的的本身字段），那么浅度克隆时就只会克隆Long id, String orderNo这两个字段，不会处理OrderDetailDTO orderDetail这个订单详情字段。
 <br/><br/>
 <B>深度克隆：</B>
-深度克隆是指在前面浅度克隆的前提下，会将OrderDetailDTO orderDetail订单详情对象也克隆对目标对象中去。使用深度克隆时需要指定克隆的方向，目前约定好一个正向与反向两个情况（见com.yx.demo.core.CloneDirection.java中的注释描述），实际开发中应该视具体业务场景使用浅度克隆或深度克隆，再只需要浅度克隆就能完成需求的就不要使用深度克隆。
+深度克隆是指在前面浅度克隆的前提下，会将OrderDetailDTO orderDetail订单详情对象也克隆对目标对象中去。使用深度克隆时需要指定克隆的方向，目前约定好一个正向与反向两个情况（见com.yx.demo.core.CloneDirection.java中的注释描述），实际开发中应该视具体业务场景使用浅度克隆或深度克隆，在只需要浅度克隆就能完成需求的就不要使用深度克隆。
 
 ## （1）浅度克隆
 ### 单个对象间的浅度克隆
