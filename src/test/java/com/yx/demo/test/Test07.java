@@ -1,80 +1,105 @@
 package com.yx.demo.test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import com.github.pagehelper.Page;
 import com.yx.demo.common.CloneDirection;
-import com.yx.demo.domain.StudentDO;
-import com.yx.demo.domain.TestObjDO;
-import com.yx.demo.domain.TestObjDTO;
+import com.yx.demo.domain.CarVO;
+import com.yx.demo.domain.HouseVO;
+import com.yx.demo.domain.PersonDO;
+import com.yx.demo.domain.PersonDTO;
+import com.yx.demo.domain.PersonVO;
+import com.yx.demo.util.ObjectCloneUtils;
 
 /**
- * 基本数据类型的深度拷贝测试
+ * 测试 com.github.pagehelper.Page 分页对象克隆，正向深度克隆
+ * 使用ObjectCloneUtils.convertList()工具类
  * @author yangxi
  *
  */
 public class Test07 {
 	
-	public static void main(String[] args) {
-		TestObjDO testObj = getTestObj();
-		System.out.println(testObj);
+public static void main(String[] args) {
 		
-		TestObjDTO testObjDTO = testObj.clone(TestObjDTO.class, CloneDirection.OPPOSITE);
+		// 单个对象clone
+		// 原始对象
+		Page<PersonVO> personVOs = getPersonVO();
+		System.out.println("原始对象personVOs:" + personVOs);
 		
-		System.out.println(testObjDTO);
+		// PersonVO clone 成 DTO
+		Page<PersonDTO> personDTOs = ObjectCloneUtils.convertPage(personVOs, PersonDTO.class, CloneDirection.FORWARD);
+		System.out.println("DTO对象personDTOs:" + personDTOs);
+		
+		// DTO clone 成 Domain类
+		Page<PersonDO> persons = ObjectCloneUtils.convertPage(personDTOs, PersonDO.class, CloneDirection.FORWARD);
+		System.out.println("Domain对象person:" + persons);
 	}
 	
-	public static TestObjDO getTestObj() {
-		TestObjDO testObj = new TestObjDO();
+	
+	public static Page<PersonVO> getPersonVO() {
+		Page<PersonVO> page = new Page<PersonVO>();
+		PersonVO personVO = new PersonVO();
+		personVO.setId(1L);
+		personVO.setName("zhangsan");
+		personVO.setAge(20);
+		personVO.setBirthday(new Date());
 		
+		List<CarVO> carList = new ArrayList<>();
+		CarVO car01 = new CarVO();
+		car01.setId(1L);
+		car01.setBrand("宝马");
+		car01.setPrice(new BigDecimal("1000000"));
+		carList.add(car01);
 		
-		StudentDO student = new StudentDO();
+		CarVO car02 = new CarVO();
+		car02.setId(2L);
+		car02.setBrand("路虎");
+		car02.setPrice(new BigDecimal("10000000"));
+		carList.add(car02);
 		
+		personVO.setCars(carList);
 		
-//		private byte bb;
-		byte a = 'a';
-		student.setBb(a);
-//		
-//		private long id;
-		student.setId(1);
-//		
-//		private int age;
-		student.setAge(1);
-//		
-//		private short clazz;
-		short c = 1;
-		student.setClazz(c);
+		HouseVO houseVO01 = new HouseVO();
+		houseVO01.setId(20L);
+		houseVO01.setColor("red");
+		houseVO01.setArea(120);
+		personVO.setHouse(houseVO01);
 		
+		page.add(personVO);
 		
-//		
-//		private double grade;
-		student.setGrade(1.1);
-//		
-//		private float flo;
-		float f = 1;
-		student.setFlo(f);
-//		
-//		private char chr;
-		char cd = 'a';
-		student.setChr(cd);
-//		
-//		private boolean bool;
-		student.setBool(false);
+		personVO = new PersonVO();
+		personVO.setId(2L);
+		personVO.setName("lisi");
+		personVO.setAge(30);
+		personVO.setBirthday(new Date());
 		
-		StudentDO subStudent = new StudentDO();
-		subStudent.setId(2);
-		subStudent.setAge(20);
+		carList = new ArrayList<>();
+		car01 = new CarVO();
+		car01.setId(1L);
+		car01.setBrand("猎豹");
+		car01.setPrice(new BigDecimal("1020000"));
+		carList.add(car01);
 		
-		student.setSubStudent(subStudent);
+		car02 = new CarVO();
+		car02.setId(2L);
+		car02.setBrand("奔驰");
+		car02.setPrice(new BigDecimal("11000000"));
+		carList.add(car02);
 		
-		testObj.setStudent(student);
+		personVO.setCars(carList);
 		
-		List<StudentDO> students = new ArrayList<>();
-		students.add(student);
-		students.add(student);
+		houseVO01 = new HouseVO();
+		houseVO01.setId(20L);
+		houseVO01.setColor("red");
+		houseVO01.setArea(120);
+		personVO.setHouse(houseVO01);
 		
-		// testObj.setStudents(students);
-		return testObj;
+		page.add(personVO);
+		
+		return page;
 	}
 
 }
