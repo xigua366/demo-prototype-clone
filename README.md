@@ -42,5 +42,5 @@ com.yx.demo.test.Test08.java（反向）
 
 # 三、使用方式
 （1）所有需要克隆的领域对象都需要实现com.yx.demo.core.AbstractObject类。<br/>
-（2）如果是单个对象克隆，直接使用对象名调用clone()方法，指定目标对象类型与是否深度克隆即可，比如order.clone(OrderDO.class);<br/>
+（2）如果是单个对象克隆，直接使用对象名调用clone()方法，指定目标对象类型与是否深度克隆即可（比如order.clone(OrderDO.class);）。<br/>
 （3）如果是集合对象或分页对象克隆，需要使用ObjectCloneUtils工具类调用里面的方法来实现。<br/>
