@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.common.CloneDirection;
+import com.yx.demo.core.CloneDirection;
 import com.yx.demo.domain.CarVO;
 import com.yx.demo.domain.HouseVO;
 import com.yx.demo.domain.PersonDO;

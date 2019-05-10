@@ -3,7 +3,7 @@ package com.yx.demo.domain;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.common.AbstractObject;
+import com.yx.demo.core.AbstractObject;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

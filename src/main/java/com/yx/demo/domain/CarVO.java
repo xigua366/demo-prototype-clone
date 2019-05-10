@@ -2,7 +2,7 @@ package com.yx.demo.domain;
 
 import java.math.BigDecimal;
 
-import com.yx.demo.common.AbstractObject;
+import com.yx.demo.core.AbstractObject;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

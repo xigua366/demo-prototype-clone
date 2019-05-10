@@ -1,4 +1,4 @@
-package com.yx.demo.common;
+package com.yx.demo.core;
 
 /**
  * 领域模型对象的类型

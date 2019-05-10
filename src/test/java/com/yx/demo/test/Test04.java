@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.common.CloneDirection;
-import com.yx.demo.domain.CarVO;
-import com.yx.demo.domain.HouseVO;
+import com.yx.demo.core.CloneDirection;
+import com.yx.demo.domain.CarDO;
+import com.yx.demo.domain.HouseDO;
 import com.yx.demo.domain.PersonDO;
 import com.yx.demo.domain.PersonDTO;
 import com.yx.demo.domain.PersonVO;
-import com.yx.demo.util.ObjectCloneUtils;
 
 /**
- * 集合对象克隆（深度克隆，正向）测试，使用ObjectUtils.convertList() 工具类方法
+ * 单个对象克隆（深度克隆，反向）测试，直接调用对象的clone()方法
  * @author yangxi
  *
  */
@@ -25,80 +24,48 @@ public class Test04 {
 		
 		// 单个对象clone
 		// 原始对象
-		List<PersonVO> personVOs = getPersonVO();
-		System.out.println("原始对象personVOs:" + personVOs);
+		PersonDO person = getPerson();
+		System.out.println("原始对象person:" + person);
 		
-		// PersonVO clone 成 DTO
-		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(personVOs, PersonDTO.class, CloneDirection.FORWARD);
-		System.out.println("DTO对象personDTOs:" + personDTOs);
+		// Person clone 成 DTO
+		PersonDTO personDTO = person.clone(PersonDTO.class, CloneDirection.OPPOSITE);
+		System.out.println("DTO对象personDTO:" + personDTO);
 		
-		// DTO clone 成 Domain类
-		List<PersonDO> persons = ObjectCloneUtils.convertList(personDTOs, PersonDO.class, CloneDirection.FORWARD);
-		System.out.println("Domain对象person:" + persons);
+		// DTO clone 成 VO类
+		PersonVO personVO = personDTO.clone(PersonVO.class, CloneDirection.OPPOSITE);
+		System.out.println("Domain对象personVO:" + personVO);
 	}
 	
 	
-	public static List<PersonVO> getPersonVO() {
-		List<PersonVO> list = new ArrayList<PersonVO>();
-		PersonVO personVO = new PersonVO();
-		personVO.setId(1L);
-		personVO.setName("zhangsan");
-		personVO.setAge(20);
-		personVO.setBirthday(new Date());
+	public static PersonDO getPerson() {
+		PersonDO person = new PersonDO();
+		person.setId(1L);
+		person.setName("zhangsan");
+		person.setAge(20);
+		person.setBirthday(new Date());
 		
-		List<CarVO> carList = new ArrayList<>();
-		CarVO car01 = new CarVO();
+		List<CarDO> carList = new ArrayList<>();
+		CarDO car01 = new CarDO();
 		car01.setId(1L);
 		car01.setBrand("宝马");
 		car01.setPrice(new BigDecimal("1000000"));
 		carList.add(car01);
 		
-		CarVO car02 = new CarVO();
+		CarDO car02 = new CarDO();
 		car02.setId(2L);
 		car02.setBrand("路虎");
 		car02.setPrice(new BigDecimal("10000000"));
 		carList.add(car02);
 		
-		personVO.setCars(carList);
+		person.setCars(carList);
 		
-		HouseVO houseVO01 = new HouseVO();
-		houseVO01.setId(20L);
-		houseVO01.setColor("red");
-		houseVO01.setArea(120);
-		personVO.setHouse(houseVO01);
+		HouseDO house01 = new HouseDO();
+		house01.setId(20L);
+		house01.setColor("red");
+		house01.setArea(120);
+		person.setHouse(house01);
 		
-		list.add(personVO);
-		
-		personVO = new PersonVO();
-		personVO.setId(2L);
-		personVO.setName("lisi");
-		personVO.setAge(30);
-		personVO.setBirthday(new Date());
-		
-		carList = new ArrayList<>();
-		car01 = new CarVO();
-		car01.setId(1L);
-		car01.setBrand("猎豹");
-		car01.setPrice(new BigDecimal("1020000"));
-		carList.add(car01);
-		
-		car02 = new CarVO();
-		car02.setId(2L);
-		car02.setBrand("奔驰");
-		car02.setPrice(new BigDecimal("11000000"));
-		carList.add(car02);
-		
-		personVO.setCars(carList);
-		
-		houseVO01 = new HouseVO();
-		houseVO01.setId(20L);
-		houseVO01.setColor("red");
-		houseVO01.setArea(120);
-		personVO.setHouse(houseVO01);
-		
-		list.add(personVO);
-		
-		return list;
+		return person;
 	}
 
 }

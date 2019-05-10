@@ -1,4 +1,4 @@
-package com.yx.demo.common;
+package com.yx.demo.core;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

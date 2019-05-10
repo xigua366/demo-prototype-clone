@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.common.CloneDirection;
+import com.yx.demo.core.CloneDirection;
+import com.yx.demo.core.ObjectCloneUtils;
 import com.yx.demo.domain.CarDO;
 import com.yx.demo.domain.HouseDO;
 import com.yx.demo.domain.PersonDO;
 import com.yx.demo.domain.PersonDTO;
 import com.yx.demo.domain.PersonVO;
-import com.yx.demo.util.ObjectCloneUtils;
 
 /**
  * 集合对象克隆（深度克隆，反向）测试，使用ObjectUtils.convertList() 工具类方法

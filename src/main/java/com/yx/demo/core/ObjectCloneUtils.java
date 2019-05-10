@@ -1,10 +1,9 @@
-package com.yx.demo.util;
+package com.yx.demo.core;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.github.pagehelper.Page;
-import com.yx.demo.common.AbstractObject;
 
 /**
  * 对象Clone工具类
