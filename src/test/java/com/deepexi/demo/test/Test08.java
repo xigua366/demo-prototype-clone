@@ -31,11 +31,11 @@ public class Test08 {
 		System.out.println("原始对象persons:" + persons);
 
 		// Person clone 成 DTO
-		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(persons, PersonDTO.class, CloneDirection.OPPOSITE);
+		Page<PersonDTO> personDTOs = ObjectCloneUtils.convertPage(persons, PersonDTO.class, CloneDirection.OPPOSITE);
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 
 		// DTO clone 成 VO类
-		List<PersonVO> personVOs = ObjectCloneUtils.convertList(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
+		Page<PersonVO> personVOs = ObjectCloneUtils.convertPage(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
 		System.out.println("VO对象personVO:" + personVOs);
 	}
 
@@ -97,6 +97,11 @@ public class Test08 {
 		house01.setArea(120);
 		person.setHouse(house01);
 
+		// 分页信息
+		page.setTotal(100);
+		page.setPageSize(1);
+		page.setPageNum(10);
+		
 		page.add(person);
 
 		return page;

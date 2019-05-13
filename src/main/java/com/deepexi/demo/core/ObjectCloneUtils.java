@@ -84,7 +84,17 @@ public class ObjectCloneUtils {
 			return null;
 		}
 		
-		Page<T> targetPage = new Page<T>(); 
+		Page<T> targetPage = new Page<>(sourcePage.getPageNum(), sourcePage.getPageSize(), sourcePage.isCount());
+		targetPage.setStartRow(sourcePage.getStartRow());
+		targetPage.setEndRow(sourcePage.getEndRow());
+		targetPage.setTotal(sourcePage.getTotal());
+		targetPage.setPages(sourcePage.getPages());
+		targetPage.setReasonable(sourcePage.getReasonable());
+		targetPage.setPageSizeZero(sourcePage.getPageSizeZero());
+		targetPage.setCountColumn(sourcePage.getCountColumn());
+		targetPage.setOrderBy(sourcePage.getOrderBy());
+		targetPage.setOrderByOnly(sourcePage.isOrderByOnly());
+		
 		for(AbstractObject sourceObject : sourcePage) {
 			targetPage.add(sourceObject.clone(targetClazz, cloneDirection));      
 		}

@@ -96,6 +96,11 @@ public class Test07 {
 		houseVO01.setColor("red");
 		houseVO01.setArea(120);
 		personVO.setHouse(houseVO01);
+		
+		// 分页信息
+		page.setTotal(100);
+		page.setPageSize(1);
+		page.setPageNum(10);
 
 		page.add(personVO);
 
