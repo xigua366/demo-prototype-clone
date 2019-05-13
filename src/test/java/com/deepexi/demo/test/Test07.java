@@ -16,7 +16,7 @@ import com.github.pagehelper.Page;
 
 /**
  * 测试 com.github.pagehelper.Page 分页对象克隆，正向深度克隆
- * 使用ObjectCloneUtils.convertList()工具类
+ * 使用ObjectCloneUtils.convertList()工具类方法
  * 
  * @author yangxi
  *
