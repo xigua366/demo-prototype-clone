@@ -1,16 +1,16 @@
-package com.yx.demo.test;
+package com.deepexi.demo.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.core.CloneDirection;
-import com.yx.demo.domain.CarDO;
-import com.yx.demo.domain.HouseDO;
-import com.yx.demo.domain.PersonDO;
-import com.yx.demo.domain.PersonDTO;
-import com.yx.demo.domain.PersonVO;
+import com.deepexi.demo.core.CloneDirection;
+import com.deepexi.demo.domain.CarDO;
+import com.deepexi.demo.domain.HouseDO;
+import com.deepexi.demo.domain.PersonDO;
+import com.deepexi.demo.domain.PersonDTO;
+import com.deepexi.demo.domain.PersonVO;
 
 /**
  * 单个对象克隆（深度克隆，反向）测试，直接调用对象的clone()方法

@@ -1,6 +1,6 @@
-package com.yx.demo.domain;
+package com.deepexi.demo.domain;
 
-import com.yx.demo.core.AbstractObject;
+import com.deepexi.demo.core.AbstractObject;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class HouseDTO extends AbstractObject {
+public class HouseDO extends AbstractObject {
 	
 	private Long id;
 	

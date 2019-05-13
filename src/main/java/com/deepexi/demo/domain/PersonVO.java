@@ -1,9 +1,9 @@
-package com.yx.demo.domain;
+package com.deepexi.demo.domain;
 
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.core.AbstractObject;
+import com.deepexi.demo.core.AbstractObject;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

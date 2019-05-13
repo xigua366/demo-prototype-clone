@@ -1,16 +1,16 @@
-package com.yx.demo.test;
+package com.deepexi.demo.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.yx.demo.core.ObjectCloneUtils;
-import com.yx.demo.domain.CarVO;
-import com.yx.demo.domain.HouseVO;
-import com.yx.demo.domain.PersonDO;
-import com.yx.demo.domain.PersonDTO;
-import com.yx.demo.domain.PersonVO;
+import com.deepexi.demo.core.ObjectCloneUtils;
+import com.deepexi.demo.domain.CarVO;
+import com.deepexi.demo.domain.HouseVO;
+import com.deepexi.demo.domain.PersonDO;
+import com.deepexi.demo.domain.PersonDTO;
+import com.deepexi.demo.domain.PersonVO;
 
 /**
  * 集合对象克隆（浅度克隆）测试，使用ObjectUtils.convertList() 工具类方法

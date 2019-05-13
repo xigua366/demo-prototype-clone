@@ -1,4 +1,4 @@
-package com.yx.demo.core;
+package com.deepexi.demo.core;
 
 import java.util.ArrayList;
 import java.util.List;
