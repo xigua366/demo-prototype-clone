@@ -11,6 +11,7 @@ public class CloneDirection {
 	 * 正向克隆：从VO->DTO，DTO->DO
 	 */
 	public static final Integer FORWARD = 1;
+	
 	/**
 	 * 反向克隆：从DO->DTO，DTO->VO
 	 */

@@ -33,7 +33,7 @@ public class ObjectCloneUtils {
 	}
 	
 	/**
-	 * 转换Mybatis分页对象-浅克隆
+	 * 转换Mybatis Page分页对象-浅克隆
 	 * @param sourceList 源集合
 	 * @param targetClazz 目标集合元素类型 
 	 * @return 转换后的集合
@@ -73,7 +73,7 @@ public class ObjectCloneUtils {
 	}
 	
 	/**
-	 * 转换Mybatis分页对象-深度克隆
+	 * 转换Mybatis Page分页对象-深度克隆
 	 * @param sourceList 源集合
 	 * @param targetClazz 目标集合元素类型 
 	 * @return 转换后的集合

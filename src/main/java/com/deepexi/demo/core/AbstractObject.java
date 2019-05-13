@@ -16,14 +16,13 @@ import java.util.List;
  *
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class AbstractObject {
+public abstract class AbstractObject {
 
 	/**
 	 * 浅度克隆
 	 * 
-	 * @param clazz
-	 * @return
-	 * @throws Exception
+	 * @param clazz 目标对象的Class类型
+	 * @return 目标对象实例
 	 */
 	public <T> T clone(Class<T> clazz) {
 		try {
@@ -40,9 +39,8 @@ public class AbstractObject {
 	/**
 	 * 浅度克隆
 	 * 
-	 * @param clazz
-	 * @return
-	 * @throws Exception
+	 * @param target 目标对象实例
+	 * @return 目标对象实例
 	 */
 	public <T> T clone(T target) {
 		try {
@@ -56,10 +54,9 @@ public class AbstractObject {
 	/**
 	 * 深度克隆
 	 * 
-	 * @param clazz
-	 * @param direction
-	 * @return
-	 * @throws Exception
+	 * @param clazz 目标对象的Class类型
+	 * @param direction 深入克隆的方向，具体赋值参见CloneDirection.java常量类
+	 * @return 目标对象实例
 	 */
 	public <T> T clone(Class<T> clazz, Integer cloneDirection) {
 		try {
@@ -68,11 +65,9 @@ public class AbstractObject {
 			T target = clazz.newInstance();
 			BeanCopierUtils.copyProperties(this, target);
 
-			// 完成所有List类型的深度克隆
+			// 完成内部的AbstractObject、List<ObjectObject>类型字段的深度克隆
 			Class<?> thisClazz = this.getClass();
-
 			Field[] fields = thisClazz.getDeclaredFields();
-
 			for (Field field : fields) {
 				field.setAccessible(true);
 
@@ -142,13 +137,12 @@ public class AbstractObject {
 	}
 
 	/**
-	 * 将一个list克隆到另外一个list
+	 * 将一个List克隆到另外一个List
 	 * 
 	 * @param sourceList
 	 * @param targetList
 	 * @param cloneTargetClazz
 	 * @param cloneDirection
-	 * @throws Exception
 	 */
 	private void cloneList(List sourceList, List targetList, Class cloneTargetClazz, Integer cloneDirection) {
 		for (Object object : sourceList) {
@@ -159,11 +153,10 @@ public class AbstractObject {
 	}
 
 	/**
-	 * 获取list集合的泛型类型
+	 * 获取List集合的泛型类型
 	 * 
 	 * @param field
 	 * @return
-	 * @throws Exception
 	 */
 	private Class<?> getListGenericType(Field field) {
 		Type genericType = field.getGenericType();
@@ -180,7 +173,6 @@ public class AbstractObject {
 	 * @param className
 	 * @param cloneDirection
 	 * @return
-	 * @throws Exception
 	 */
 	private Class<?> getCloneTargetClazz(Class<?> clazz, Integer cloneDirection) {
 		try {
@@ -242,10 +234,8 @@ public class AbstractObject {
 	/**
 	 * 浅度克隆时原对象List属性的处理
 	 * 
-	 * @param <T>
 	 * @param target
 	 * @return
-	 * @throws Exception
 	 */
 	private <T> T getTarget(T target) throws Exception {
 		Class<?> thisClazz = target.getClass();

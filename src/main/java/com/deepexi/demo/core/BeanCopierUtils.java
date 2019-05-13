@@ -27,7 +27,6 @@ public class BeanCopierUtils {
         		target.getClass().toString();  
         
         BeanCopier beanCopier = null;  
-        
         if (!beanCopierCacheMap.containsKey(cacheKey)) {  
         	synchronized(BeanCopierUtils.class) {
         		 if(!beanCopierCacheMap.containsKey(cacheKey)) { 
@@ -40,7 +39,6 @@ public class BeanCopierUtils {
         } else {  
             beanCopier = beanCopierCacheMap.get(cacheKey);   
         }  
-        
         beanCopier.copy(source, target, null);  
     }  
   
