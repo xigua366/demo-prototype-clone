@@ -25,17 +25,17 @@ public class Test08 {
 
 	public static void main(String[] args) {
 
-		// 单个对象clone
+		// com.github.pagehelper.Page分页集合clone
 		// 原始对象
-		Page<PersonDO> persons = getPerson();
+		List<PersonDO> persons = getPerson();
 		System.out.println("原始对象persons:" + persons);
 
 		// Person clone 成 DTO
-		Page<PersonDTO> personDTOs = ObjectCloneUtils.convertPage(persons, PersonDTO.class, CloneDirection.OPPOSITE);
+		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(persons, PersonDTO.class, CloneDirection.OPPOSITE);
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 
 		// DTO clone 成 VO类
-		Page<PersonVO> personVOs = ObjectCloneUtils.convertPage(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
+		List<PersonVO> personVOs = ObjectCloneUtils.convertList(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
 		System.out.println("VO对象personVO:" + personVOs);
 	}
 

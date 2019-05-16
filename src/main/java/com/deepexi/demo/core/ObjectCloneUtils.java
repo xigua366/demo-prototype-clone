@@ -13,7 +13,7 @@ import com.github.pagehelper.Page;
 public class ObjectCloneUtils {
 
 	/**
-	 * 转换集合
+	 * 转换集合-浅克隆
 	 * @param sourceList 源集合
 	 * @param targetClazz 目标集合元素类型 
 	 * @return 转换后的集合
@@ -24,32 +24,21 @@ public class ObjectCloneUtils {
 			return null;
 		}
 		
+		// 判断是否分页组件
+		if(sourceList instanceof Page) {
+			Page<T> targetPage = new Page<T>(); 
+			for(AbstractObject sourceObject : sourceList) {
+				targetPage.add(sourceObject.clone(targetClazz));    
+			}
+			return targetPage;
+		}
+		
 		List<T> targetList = new ArrayList<T>(); 
 		for(AbstractObject sourceObject : sourceList) {
 			targetList.add(sourceObject.clone(targetClazz));    
 		}
 		
 		return targetList;
-	}
-	
-	/**
-	 * 转换Mybatis Page分页对象-浅克隆
-	 * @param sourceList 源集合
-	 * @param targetClazz 目标集合元素类型 
-	 * @return 转换后的集合
-	 */
-	public static <T> Page<T> convertPage(
-			Page<? extends AbstractObject> sourcePage, Class<T> targetClazz) {
-		if(sourcePage == null) {
-			return null;
-		}
-		
-		Page<T> targetPage = new Page<T>(); 
-		for(AbstractObject sourceObject : sourcePage) {
-			targetPage.add(sourceObject.clone(targetClazz));    
-		}
-		
-		return targetPage;
 	}
 	
 	/**
@@ -64,42 +53,33 @@ public class ObjectCloneUtils {
 			return null;
 		}
 		
+		// 判断是否分页组件
+		if(sourceList instanceof Page) {
+			Page<? extends AbstractObject> tempPage = (Page<? extends AbstractObject>) sourceList;
+			Page<T> targetPage = new Page<>(tempPage.getPageNum(), tempPage.getPageSize(), tempPage.isCount());
+			targetPage.setStartRow(tempPage.getStartRow());
+			targetPage.setEndRow(tempPage.getEndRow());
+			targetPage.setTotal(tempPage.getTotal());
+			targetPage.setPages(tempPage.getPages());
+			targetPage.setReasonable(tempPage.getReasonable());
+			targetPage.setPageSizeZero(tempPage.getPageSizeZero());
+			targetPage.setCountColumn(tempPage.getCountColumn());
+			targetPage.setOrderBy(tempPage.getOrderBy());
+			targetPage.setOrderByOnly(tempPage.isOrderByOnly());
+			
+			for(AbstractObject sourceObject : tempPage) {
+				targetPage.add(sourceObject.clone(targetClazz, cloneDirection));      
+			}
+			
+			return targetPage;
+		}
+		
 		List<T> targetList = new ArrayList<T>(); 
 		for(AbstractObject sourceObject : sourceList) {
 			targetList.add(sourceObject.clone(targetClazz, cloneDirection));      
 		}
 		
 		return targetList;
-	}
-	
-	/**
-	 * 转换Mybatis Page分页对象-深度克隆
-	 * @param sourceList 源集合
-	 * @param targetClazz 目标集合元素类型 
-	 * @return 转换后的集合
-	 */
-	public static <T> Page<T> convertPage(Page<? extends AbstractObject> sourcePage, 
-			Class<T> targetClazz, Integer cloneDirection) {
-		if(sourcePage == null) {
-			return null;
-		}
-		
-		Page<T> targetPage = new Page<>(sourcePage.getPageNum(), sourcePage.getPageSize(), sourcePage.isCount());
-		targetPage.setStartRow(sourcePage.getStartRow());
-		targetPage.setEndRow(sourcePage.getEndRow());
-		targetPage.setTotal(sourcePage.getTotal());
-		targetPage.setPages(sourcePage.getPages());
-		targetPage.setReasonable(sourcePage.getReasonable());
-		targetPage.setPageSizeZero(sourcePage.getPageSizeZero());
-		targetPage.setCountColumn(sourcePage.getCountColumn());
-		targetPage.setOrderBy(sourcePage.getOrderBy());
-		targetPage.setOrderByOnly(sourcePage.isOrderByOnly());
-		
-		for(AbstractObject sourceObject : sourcePage) {
-			targetPage.add(sourceObject.clone(targetClazz, cloneDirection));      
-		}
-		
-		return targetPage;
 	}
 	
 }

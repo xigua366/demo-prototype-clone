@@ -23,7 +23,7 @@ public class Test05 {
 	
 	public static void main(String[] args) {
 		
-		// 单个对象clone
+		// ArrayList集合对象clone
 		// 原始对象
 		List<PersonVO> personVOs = getPersonVO();
 		System.out.println("原始对象personVOs:" + personVOs);
