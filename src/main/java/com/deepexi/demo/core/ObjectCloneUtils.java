@@ -26,7 +26,7 @@ public class ObjectCloneUtils {
 		
 		// 判断是否分页组件
 		if(sourceList instanceof Page) {
-			Page<T> targetPage = new Page<T>(); 
+			Page<T> targetPage = getTargetPage(sourceList);
 			for(AbstractObject sourceObject : sourceList) {
 				targetPage.add(sourceObject.clone(targetClazz));    
 			}
@@ -55,19 +55,8 @@ public class ObjectCloneUtils {
 		
 		// 判断是否分页组件
 		if(sourceList instanceof Page) {
-			Page<? extends AbstractObject> tempPage = (Page<? extends AbstractObject>) sourceList;
-			Page<T> targetPage = new Page<>(tempPage.getPageNum(), tempPage.getPageSize(), tempPage.isCount());
-			targetPage.setStartRow(tempPage.getStartRow());
-			targetPage.setEndRow(tempPage.getEndRow());
-			targetPage.setTotal(tempPage.getTotal());
-			targetPage.setPages(tempPage.getPages());
-			targetPage.setReasonable(tempPage.getReasonable());
-			targetPage.setPageSizeZero(tempPage.getPageSizeZero());
-			targetPage.setCountColumn(tempPage.getCountColumn());
-			targetPage.setOrderBy(tempPage.getOrderBy());
-			targetPage.setOrderByOnly(tempPage.isOrderByOnly());
-			
-			for(AbstractObject sourceObject : tempPage) {
+			Page<T> targetPage = getTargetPage(sourceList);
+			for(AbstractObject sourceObject : sourceList) {
 				targetPage.add(sourceObject.clone(targetClazz, cloneDirection));      
 			}
 			
@@ -80,6 +69,27 @@ public class ObjectCloneUtils {
 		}
 		
 		return targetList;
+	}
+	
+	/**
+	 * 获取转换后的Page对象
+	 * @param <T>
+	 * @param sourceList
+	 * @return
+	 */
+	private static <T> Page<T> getTargetPage(List<? extends AbstractObject> sourceList) {
+		Page<? extends AbstractObject> tempPage = (Page<? extends AbstractObject>) sourceList;
+		Page<T> targetPage = new Page<>(tempPage.getPageNum(), tempPage.getPageSize(), tempPage.isCount());
+		targetPage.setStartRow(tempPage.getStartRow());
+		targetPage.setEndRow(tempPage.getEndRow());
+		targetPage.setTotal(tempPage.getTotal());
+		targetPage.setPages(tempPage.getPages());
+		targetPage.setReasonable(tempPage.getReasonable());
+		targetPage.setPageSizeZero(tempPage.getPageSizeZero());
+		targetPage.setCountColumn(tempPage.getCountColumn());
+		targetPage.setOrderBy(tempPage.getOrderBy());
+		targetPage.setOrderByOnly(tempPage.isOrderByOnly());
+		return targetPage;
 	}
 	
 }
