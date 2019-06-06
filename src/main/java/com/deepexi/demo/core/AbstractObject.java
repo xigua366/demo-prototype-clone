@@ -103,7 +103,9 @@ public abstract class AbstractObject {
 					}
 
 					// 获取要克隆的目标类型
-					Class<?> cloneTargetClazz = getCloneTargetClazz(field.getType(), cloneDirection);
+					//Class<?> cloneTargetClazz = getCloneTargetClazz(field.getType(), cloneDirection);
+					Field targetField = clazz.getDeclaredField(field.getName());
+					Class<?> cloneTargetClazz = targetField.getType();
 					AbstractObject clonedObj = (AbstractObject) sourceObj.clone(cloneTargetClazz, cloneDirection);
 					// 获取设置克隆好的对象的方法名称
 					Method setFieldMethod = getSetCloneFieldMethodName(field, clazz);
@@ -116,9 +118,10 @@ public abstract class AbstractObject {
 					}
 
 					// 获取List集合中的泛型类型
-					Class<?> listGenericClazz = getListGenericType(field);
+					Field targetField = clazz.getDeclaredField(field.getName());
+					Class<?> cloneTargetClazz = getListGenericType(targetField);
 					// 获取要克隆的目标类型
-					Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection);
+					//Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection);
 					// 将list集合克隆到目标list集合中去
 					List clonedList = new ArrayList();
 					cloneList(list, clonedList, cloneTargetClazz, cloneDirection);
