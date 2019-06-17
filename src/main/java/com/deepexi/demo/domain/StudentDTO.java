@@ -1,6 +1,6 @@
 package com.deepexi.demo.domain;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 import com.deepexi.demo.core.AbstractObject;
 
@@ -9,12 +9,17 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class CarDTO extends AbstractObject {
+public class StudentDTO extends AbstractObject {
 	
 	private Long id;
 	
-	private String brand;
+	private String name;
 	
-	private BigDecimal price;
+	private Integer age;
+	
+	private List<Long> ids;
+	
+	
+	
 
 }

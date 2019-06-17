@@ -149,9 +149,14 @@ public abstract class AbstractObject {
 	 */
 	private void cloneList(List sourceList, List targetList, Class cloneTargetClazz, Integer cloneDirection) {
 		for (Object object : sourceList) {
-			AbstractObject targetObject = (AbstractObject) object;
-			AbstractObject clonedObject = (AbstractObject) targetObject.clone(cloneTargetClazz, cloneDirection);
-			targetList.add(clonedObject);
+			if(object instanceof AbstractObject) {
+				AbstractObject targetObject = (AbstractObject) object;
+				AbstractObject clonedObject = (AbstractObject) targetObject.clone(cloneTargetClazz, cloneDirection);
+				targetList.add(clonedObject);
+			} else {
+				// 非List<? extends AbstractObject>类型的集合字段，直接复用原对象的字段值
+				targetList.add(object);
+			}
 		}
 	}
 
@@ -177,6 +182,7 @@ public abstract class AbstractObject {
 	 * @param cloneDirection
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private Class<?> getCloneTargetClazz(Class<?> clazz, Integer cloneDirection) {
 		try {
 			String cloneTargetClassName = null;
@@ -191,6 +197,9 @@ public abstract class AbstractObject {
 							+ "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
 					cloneTargetClassName = className.substring(0, className.length() - 3) + "DO";
+				} else {
+					// 可能存在List<Long>这样的非List<? extends AbstractObject>类型的集合类型字段
+					cloneTargetClassName = className;
 				}
 			}
 
@@ -201,6 +210,9 @@ public abstract class AbstractObject {
 							+ "DTO";
 				} else if (className.endsWith(DomainType.DTO)) {
 					cloneTargetClassName = className.substring(0, className.length() - 3) + "VO";
+				} else {
+					// 可能存在List<Long>这样的非List<? extends AbstractObject>类型的集合类型字段
+					cloneTargetClassName = className;
 				}
 			}
 
@@ -254,9 +266,19 @@ public abstract class AbstractObject {
 			if (list == null || list.size() == 0) {
 				continue;
 			}
-
+			
+			// 进一步判断是否List<? extends AbstractObject>类型的集合类型
+			List targetList = new ArrayList();
+			for (Object object : list) {
+				if(!(object instanceof AbstractObject)) {
+					// 非List<? extends AbstractObject>类型的集合字段，直接复用原对象的字段值
+					targetList.add(object);
+				}
+				// List<? extends AbstractObject>类型的集合字段，在浅克隆时不处理，默认设置目标对象为new ArrayList();
+			}
+			
 			Method setFieldMethod = getSetCloneFieldMethodName(field, target.getClass());
-			setFieldMethod.invoke(target, new ArrayList());
+			setFieldMethod.invoke(target, targetList);
 		}
 
 		return target;

@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
  *
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class HouseVO extends AbstractObject {
 	
 	private Long id;
