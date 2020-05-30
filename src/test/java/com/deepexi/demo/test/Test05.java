@@ -32,9 +32,9 @@ public class Test05 {
 		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(personVOs, PersonDTO.class, CloneDirection.FORWARD);
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 		
-		// DTO clone 成 Domain类
-		List<PersonDO> persons = ObjectCloneUtils.convertList(personDTOs, PersonDO.class, CloneDirection.FORWARD);
-		System.out.println("Domain对象person:" + persons);
+//		// DTO clone 成 Domain类
+//		List<PersonDO> persons = ObjectCloneUtils.convertList(personDTOs, PersonDO.class, CloneDirection.FORWARD);
+//		System.out.println("Domain对象person:" + persons);
 	}
 	
 	

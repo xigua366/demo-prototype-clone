@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class PersonDTO extends AbstractObject {
+public class PersonDTO {
 
 	private Long id;
 

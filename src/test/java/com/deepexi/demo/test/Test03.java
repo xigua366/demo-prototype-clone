@@ -31,9 +31,9 @@ public class Test03 {
 		PersonDTO personDTO = personVO.clone(PersonDTO.class, CloneDirection.FORWARD);
 		System.out.println("DTO对象personDTO:" + personDTO);
 		
-		// DTO clone 成 Domain类
-		PersonDO person = personDTO.clone(PersonDO.class, CloneDirection.FORWARD);
-		System.out.println("Domain对象person:" + person);
+//		// DTO clone 成 Domain类
+//		PersonDO person = personDTO.clone(PersonDO.class, CloneDirection.FORWARD);
+//		System.out.println("Domain对象person:" + person);
 	}
 	
 	

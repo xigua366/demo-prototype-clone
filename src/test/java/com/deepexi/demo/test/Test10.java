@@ -9,6 +9,8 @@ import com.deepexi.demo.domain.StudentVO;
 
 /**
  * 测试 List<Long> 基本数据类型的集合类型克隆，深度克隆
+ *
+ * 测试结果，List<Long> 基本数据类型的集合类型克隆无论深度还是浅度都可以克隆数据
  * 
  * @author yangxi
  *

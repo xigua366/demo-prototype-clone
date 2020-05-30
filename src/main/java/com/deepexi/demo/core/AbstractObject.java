@@ -5,13 +5,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 基础POJO类
- * 
+ *
  * @author yangxi
  *
  */
@@ -20,7 +18,7 @@ public abstract class AbstractObject {
 
 	/**
 	 * 浅度克隆
-	 * 
+	 *
 	 * @param clazz 目标对象的Class类型
 	 * @return 目标对象实例
 	 */
@@ -38,7 +36,7 @@ public abstract class AbstractObject {
 
 	/**
 	 * 浅度克隆
-	 * 
+	 *
 	 * @param target 目标对象实例
 	 * @return 目标对象实例
 	 */
@@ -53,9 +51,9 @@ public abstract class AbstractObject {
 
 	/**
 	 * 深度克隆
-	 * 
+	 *
 	 * @param clazz 目标对象的Class类型
-	 * @param direction 深入克隆的方向，具体赋值参见CloneDirection.java常量类
+	 * @param cloneDirection 深入克隆的方向，具体赋值参见CloneDirection.java常量类
 	 * @return 目标对象实例
 	 */
 	public <T> T clone(Class<T> clazz, Integer cloneDirection) {
@@ -65,14 +63,15 @@ public abstract class AbstractObject {
 			T target = clazz.newInstance();
 			BeanCopierUtils.copyProperties(this, target);
 
-			// 完成内部的AbstractObject、List<ObjectObject>类型字段的深度克隆
+			// 完成内部的AbstractObject、List<AbstractObject>类型字段的深度克隆
 			Class<?> thisClazz = this.getClass();
-			Field[] fields = thisClazz.getDeclaredFields();
-			for (Field field : fields) {
+			List<Field> fieldList = listField(null, thisClazz);
+
+			for (Field field : fieldList) {
 				field.setAccessible(true);
 
 				// 如果判断某个字段是List类型的
-				if (field.getType() != List.class) {
+				if (!Collection.class.isAssignableFrom(field.getType())) {
 					Class<?> sourceFeildClazz = field.getType();
 					if (sourceFeildClazz == String.class || sourceFeildClazz == Long.class
 							|| sourceFeildClazz.toString().equals("long") || field.getType() == Integer.class
@@ -106,18 +105,22 @@ public abstract class AbstractObject {
 					//Class<?> cloneTargetClazz = getCloneTargetClazz(field.getType(), cloneDirection);
 					Field targetField = null;
 					try {
-						targetField = clazz.getDeclaredField(field.getName());
+						targetField = getTargetClazzField(field, clazz);
 					} catch(NoSuchFieldException e) {
 						continue;
 					}
-					Class<?> cloneTargetClazz = targetField.getType();
-					AbstractObject clonedObj = (AbstractObject) sourceObj.clone(cloneTargetClazz, cloneDirection);
-					// 获取设置克隆好的对象的方法名称
-					Method setFieldMethod = getSetCloneFieldMethodName(field, clazz);
-					setFieldMethod.invoke(target, clonedObj);
-
+					if(targetField != null) {
+						Class<?> cloneTargetClazz = targetField.getType();
+						AbstractObject clonedObj = (AbstractObject) sourceObj.clone(cloneTargetClazz, cloneDirection);
+						// 获取设置克隆好的对象的方法名称
+						String name = field.getName();
+						String setMethodName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
+						// getMethod()方法可以获取当前类与父类中所有的public方法
+						Method setFieldMethod = clazz.getMethod(setMethodName, targetField.getType());
+						setFieldMethod.invoke(target, clonedObj);
+					}
 				} else {
-					List<?> list = (List<?>) field.get(this);
+					Collection<?> list = (Collection<?>) field.get(this);
 					if (list == null || list.size() == 0) {
 						continue;
 					}
@@ -125,20 +128,25 @@ public abstract class AbstractObject {
 					// 获取List集合中的泛型类型
 					Field targetField = null;
 					try {
-						clazz.getDeclaredField(field.getName());
+						targetField = getTargetClazzField(field, clazz);
 					} catch(NoSuchFieldException e) {
 						continue;
 					}
-					Class<?> cloneTargetClazz = getListGenericType(targetField);
-					// 获取要克隆的目标类型
-					//Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection);
-					// 将list集合克隆到目标list集合中去
-					List clonedList = new ArrayList();
-					cloneList(list, clonedList, cloneTargetClazz, cloneDirection);
+					if(targetField != null) {
+						Class<?> cloneTargetClazz = getListGenericType(targetField);
+						// 获取要克隆的目标类型
+						//Class<?> cloneTargetClazz = getCloneTargetClazz(listGenericClazz, cloneDirection);
+						// 将list集合克隆到目标list集合中去
+						Collection clonedList = (Collection) field.get(this).getClass().newInstance();
+						cloneList(list, clonedList, cloneTargetClazz, cloneDirection);
 
-					// 获取设置克隆好的list的方法名称
-					Method setFieldMethod = getSetCloneFieldMethodName(field, clazz);
-					setFieldMethod.invoke(target, clonedList);
+						// 获取设置克隆好的list的方法名称
+						String name = field.getName();
+						String setMethodName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
+						// getMethod()方法可以获取当前类与父类中所有的public方法
+						Method setFieldMethod = clazz.getMethod(setMethodName, targetField.getType());
+						setFieldMethod.invoke(target, clonedList);
+					}
 				}
 
 			}
@@ -150,14 +158,63 @@ public abstract class AbstractObject {
 	}
 
 	/**
+	 * 递归获取当前类以及父类中的字段
+	 * @param fieldList
+	 * @param thisClazz 原始类Class对象
+	 * @return
+	 */
+	public List<Field> listField(List<Field> fieldList, Class<?> thisClazz) {
+		if(fieldList == null) {
+			fieldList = new ArrayList<>(Arrays.asList(thisClazz.getDeclaredFields()));
+		} else {
+			fieldList.addAll(Arrays.asList(thisClazz.getDeclaredFields()));
+		}
+
+		if(!thisClazz.getSuperclass().getTypeName().equals(AbstractObject.class.getTypeName())) {
+			listField(fieldList, thisClazz.getSuperclass());
+		}
+		return fieldList;
+	}
+
+	/**
+	 * 如果目标有继承父类需要递归获取目标字段
+	 * @param field
+	 * @param clazz
+	 * @return
+	 * @throws NoSuchFieldException
+	 */
+	private Field getTargetClazzField(Field field, Class<?> clazz) throws NoSuchFieldException{
+		Field targetField = null;
+		try {
+			targetField = clazz.getDeclaredField(field.getName());
+		} catch(NoSuchFieldException e) {
+			// 目标类有可能没有继承AbstractObject类
+			if(clazz.getSuperclass() != null) {
+				String targetSuperClazzTypeName = clazz.getSuperclass().getTypeName();
+				if(targetSuperClazzTypeName.equals(Object.class.getTypeName()) && !targetSuperClazzTypeName.equals(AbstractObject.class.getTypeName())) {
+					// 递归
+					targetField = getTargetClazzField(field, clazz.getSuperclass());
+				}
+			}
+
+			if(targetField == null) {
+				throw e;
+			}
+
+		}
+		return targetField;
+
+	}
+
+	/**
 	 * 将一个List克隆到另外一个List
-	 * 
+	 *
 	 * @param sourceList
 	 * @param targetList
 	 * @param cloneTargetClazz
 	 * @param cloneDirection
 	 */
-	private void cloneList(List sourceList, List targetList, Class cloneTargetClazz, Integer cloneDirection) {
+	private void cloneList(Collection sourceList, Collection targetList, Class cloneTargetClazz, Integer cloneDirection) {
 		for (Object object : sourceList) {
 			if(object instanceof AbstractObject) {
 				AbstractObject targetObject = (AbstractObject) object;
@@ -172,7 +229,7 @@ public abstract class AbstractObject {
 
 	/**
 	 * 获取List集合的泛型类型
-	 * 
+	 *
 	 * @param field
 	 * @return
 	 */
@@ -186,85 +243,14 @@ public abstract class AbstractObject {
 	}
 
 	/**
-	 * 获取目标类名
-	 * 
-	 * @param className
-	 * @param cloneDirection
-	 * @return
-	 */
-	@SuppressWarnings("unused")
-	private Class<?> getCloneTargetClazz(Class<?> clazz, Integer cloneDirection) {
-		try {
-			String cloneTargetClassName = null;
-
-			// ReflectionDTO
-			String className = clazz.getName();
-
-			// 正向克隆
-			if (cloneDirection.equals(CloneDirection.FORWARD)) {
-				if (className.endsWith(DomainType.VO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 2)
-							+ "DTO";
-				} else if (className.endsWith(DomainType.DTO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 3) + "DO";
-				} else {
-					// 可能存在List<Long>这样的非List<? extends AbstractObject>类型的集合类型字段
-					cloneTargetClassName = className;
-				}
-			}
-
-			// 反向克隆
-			if (cloneDirection.equals(CloneDirection.OPPOSITE)) {
-				if (className.endsWith(DomainType.DO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 2)
-							+ "DTO";
-				} else if (className.endsWith(DomainType.DTO)) {
-					cloneTargetClassName = className.substring(0, className.length() - 3) + "VO";
-				} else {
-					// 可能存在List<Long>这样的非List<? extends AbstractObject>类型的集合类型字段
-					cloneTargetClassName = className;
-				}
-			}
-
-			return Class.forName(cloneTargetClassName);
-		} catch (Exception e) {
-			throw new RuntimeException("error", e);
-		}
-
-	}
-
-	/**
-	 * 获取设置克隆好的对象或List属性的方法名称
-	 * 
-	 * @param field
-	 * @param clazz
-	 * @return
-	 */
-	private Method getSetCloneFieldMethodName(Field field, Class<?> clazz) {
-		String name = field.getName();
-		String setMethodName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
-
-		Method setFieldMethod = null;
-
-		for (Method method : clazz.getDeclaredMethods()) {
-			if (method.getName().equals(setMethodName)) {
-				setFieldMethod = method;
-				break;
-			}
-		}
-
-		return setFieldMethod;
-	}
-
-	/**
 	 * 浅度克隆时原对象List属性的处理
-	 * 
+	 *
 	 * @param target
 	 * @return
 	 */
 	private <T> T getTarget(T target) throws Exception {
-		Class<?> thisClazz = target.getClass();
-		Field[] fields = thisClazz.getDeclaredFields();
+		Class<?> targetClazz = target.getClass();
+		Field[] fields = targetClazz.getDeclaredFields();
 		for (Field field : fields) {
 			field.setAccessible(true);
 
@@ -276,19 +262,12 @@ public abstract class AbstractObject {
 			if (list == null || list.size() == 0) {
 				continue;
 			}
-			
-			// 进一步判断是否List<? extends AbstractObject>类型的集合类型
-			List targetList = new ArrayList();
-			for (Object object : list) {
-				if(!(object instanceof AbstractObject)) {
-					// 非List<? extends AbstractObject>类型的集合字段，直接复用原对象的字段值
-					targetList.add(object);
-				}
-				// List<? extends AbstractObject>类型的集合字段，在浅克隆时不处理，默认设置目标对象为new ArrayList();
-			}
-			
-			Method setFieldMethod = getSetCloneFieldMethodName(field, target.getClass());
-			setFieldMethod.invoke(target, targetList);
+
+			String name = field.getName();
+			String setMethodName = "set" + name.substring(0, 1).toUpperCase() + name.substring(1);
+
+			Method setFieldMethod = targetClazz.getMethod(setMethodName, field.getType());
+			setFieldMethod.invoke(target, new ArrayList());
 		}
 
 		return target;

@@ -31,9 +31,9 @@ public class Test04 {
 		PersonDTO personDTO = person.clone(PersonDTO.class, CloneDirection.OPPOSITE);
 		System.out.println("DTO对象personDTO:" + personDTO);
 		
-		// DTO clone 成 VO类
-		PersonVO personVO = personDTO.clone(PersonVO.class, CloneDirection.OPPOSITE);
-		System.out.println("Domain对象personVO:" + personVO);
+//		// DTO clone 成 VO类
+//		PersonVO personVO = personDTO.clone(PersonVO.class, CloneDirection.OPPOSITE);
+//		System.out.println("Domain对象personVO:" + personVO);
 	}
 	
 	

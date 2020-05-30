@@ -34,9 +34,9 @@ public class Test08 {
 		List<PersonDTO> personDTOs = ObjectCloneUtils.convertList(persons, PersonDTO.class, CloneDirection.OPPOSITE);
 		System.out.println("DTO对象personDTOs:" + personDTOs);
 
-		// DTO clone 成 VO类
-		List<PersonVO> personVOs = ObjectCloneUtils.convertList(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
-		System.out.println("VO对象personVO:" + personVOs);
+//		// DTO clone 成 VO类
+//		List<PersonVO> personVOs = ObjectCloneUtils.convertList(personDTOs, PersonVO.class, CloneDirection.OPPOSITE);
+//		System.out.println("VO对象personVO:" + personVOs);
 	}
 
 	public static Page<PersonDO> getPerson() {
